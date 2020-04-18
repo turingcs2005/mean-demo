@@ -1,1 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+@import './app/styles/theme.scss';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.bold {
+  font-weight: bold;
+}
+
+.tip {
+  color: $primary500;
+}
+
+.link {
+  color: $accent500;
+  cursor: pointer;
+}
+
+.placeholder {
+  color: tan;
+}
+
+.terminal {
+  padding: 2px 5px;
+  border-radius: 3px;
+  color: white;
+  background-color: $primary900;
+}
+
+.block {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  max-width: 1000px;
+}
+
+.code {
+  color: $primary900;
+}

@@ -1,0 +1,11 @@
+<p class="mat-h1">This app demonstrates the following utilities of the
+  <span class="tip" matTooltip="MongoDB, Express.js, Angular and Node.js">MEAN</span> stack:</p>
+
+<mat-list>
+  <mat-list-item *ngFor="let x of menuList">
+    <div mat-line>
+      <span [routerLink]="['/', x.link]" class="link">{{x.title}}</span>
+    </div>
+    <div mat-line>{{x.description}}</div>
+  </mat-list-item>
+</mat-list>

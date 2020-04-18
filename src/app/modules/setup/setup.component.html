@@ -1,0 +1,65 @@
+<div class="mat-h1">{{menuItem.title}}</div>
+
+<mat-accordion multi=true>
+
+  <mat-expansion-panel class="block">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Global packages
+      </mat-panel-title>
+      <mat-panel-description>
+        Install global NPM packages on terminal
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div *ngFor="let x of globalPackages">
+      <code class="terminal">sudo npm i -g {{x}}</code>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="block">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Express back end
+      </mat-panel-title>
+      <mat-panel-description>
+        Create express project; install packages
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div><code class="terminal">express <span class="placeholder">PROJECT_NAME</span> --no-view</code></div>
+    <div><code class="terminal">cd <span class="placeholder">PROJECT_NAME</span></code></div>
+    <div *ngFor="let x of projectPackages">
+      <code class="terminal">npm i {{x}}</code>
+    </div>
+
+    <br><p>Edit package.json file. Under 'script', add </p>
+    <div>
+      <code class="code">"devstart": "DEBUG=sales-report:* nodemon ./bin/www"</code>
+    </div>
+
+    <br><p>Launch server</p>
+    <div><code class="terminal">npm run devstart</code></div>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="block">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Angular front end
+      </mat-panel-title>
+      <mat-panel-description>
+        Create Angular front end; install material
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div><code class="terminal">ng new <span class="placeholder">client</span></code></div>
+    <div><code class="terminal">cd <span class="placeholder">client</span></code></div>
+    <div><code class="terminal">ng add @angular/material</code></div>
+    <br><p>Launch client</p>
+    <div><code class="terminal">ng serve -o</code></div>
+  </mat-expansion-panel>
+
+</mat-accordion>
+
+
