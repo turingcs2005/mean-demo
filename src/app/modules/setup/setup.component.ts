@@ -22,7 +22,8 @@ export class SetupComponent implements OnInit {
     'express-fileupload',
     'mongoose',
     'socketio',
-    'socket.io-client'
+    'socket.io-client',
+    'body-parser'
   ];
 
   constructor(

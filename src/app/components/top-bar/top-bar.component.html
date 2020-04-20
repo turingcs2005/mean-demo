@@ -1,7 +1,11 @@
 <mat-toolbar color="primary">
   <mat-icon [matMenuTriggerFor]="mainMenu">menu</mat-icon>
   <div>{{ title }}</div>
-  <mat-icon [routerLink]="['/about']">help</mat-icon>
+  <div>
+    <mat-icon [routerLink]="['/']">home</mat-icon>
+    <mat-icon [routerLink]="['/help']">help</mat-icon>
+  </div>
+
 </mat-toolbar>
 
 <mat-menu #mainMenu="matMenu">
@@ -10,5 +14,6 @@
   *ngFor="let x of menuList"
   [routerLink]="['/', x.link]"
   >{{x.title}}</button>
+  <button mat-menu-item [routerLink]="['/help']"><mat-icon>help</mat-icon></button>
 </mat-menu>
 

@@ -15,6 +15,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .link {
   color: $accent500;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .placeholder {
@@ -37,4 +38,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .code {
   color: $primary900;
+}
+
+.hidden {
+  display: none;
+}
+
+.comment {
+  color: $accent200;
 }

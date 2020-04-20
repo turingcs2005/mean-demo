@@ -1,6 +1,91 @@
 <div class="mat-h1">{{menuItem.title}}</div>
 
-<mat-accordion multi=true>
+<mat-accordion multi=false>
+
+  <mat-expansion-panel class="block">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Software installation: Node.js &amp; MongoDB
+      </mat-panel-title>
+      <mat-panel-description>
+        JavaScript runtime and non-SQL database
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div><a href="https://nodejs.org/en/" target=_blank class="link"
+      matTooltip="JavaScript runtime. Needed for installing all JavaScript packages such
+      as Angular cli, express and mongoose.">Node.js</a></div>
+    <div>Follow instructions for your OS. For Fedora Linux:</div>
+    <div>
+      <code class="terminal">sudo dnf install -y gcc-c++ make</code>
+    </div>
+    <div>
+      <code class="terminal">curl -sL https://rpm.nodesource.com/setup_13.x | sudo -E bash -</code>
+    </div>
+      <div class="comment">Or whichever version of Node.js you would like to install.</div>
+    <div>
+      <code class="terminal">curl -sL https://rpm.nodesource.com/setup_13.x | sudo -E bash -</code>
+    </div>
+    <div>
+      <code class="terminal">sudo dnf install nodejs</code>
+    </div>
+    <br>
+
+    <div><a href="https://www.mongodb.com/" target=_blank class="link"
+      matTooltip="Fee, open-source non-relational database">MongoDB</a></div>
+    <div>Follow instructions for your OS. For Fedora Linux, use Redhat installation
+      <a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/" target=_blank>documentation</a>.
+      You may replace 'yum' with 'dnf'.
+    </div>
+    <br>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="block">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Other software installation: Git, VSC &amp; Postman
+      </mat-panel-title>
+      <mat-panel-description>
+        Version control, IDE and API test
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div><a href="https://git-scm.com/" target=_blank class="link"
+      matTooltip="Version control software">Git</a></div>
+    <div>Follow instructiosn for your OS. For Fedora Linux:</div>
+    <div>
+      <code class="terminal">sudo dnf install -y git</code>
+    </div>
+    <div>Configure your git user name and user email.</div>
+    <div>
+      <code class="terminal">git config --global user.name "YOUR_NAME"</code>
+    </div>
+    <div>
+      <code class="terminal">git config --global user.email "YOUR_EMAIL"</code>
+    </div>
+    <br>
+
+    <div><a href="https://code.visualstudio.com/" target=_blank class="link"
+      matTooltip="IDE (integrated development environment)">Visual Studio Code</a></div>
+    <div>Follow instructiosn for your OS or build from source.</div>
+    <br>
+
+    <div><a href="https://www.postman.com/" target=_blank class="link"
+      matTooltip="For testing API services">Postman</a></div>
+    <div>Follow instructiosn for your OS. For Fedora Linux:</div>
+    <div>
+      <code class="terminal">sudo dnf install snapd</code>
+    </div>
+    <div>
+      <code class="terminal">sudo ln -s /var/lib/snapd/snap /snap</code>
+    </div>
+    <div>
+      <code class="terminal">sudo snap install postman</code>
+    </div>
+    <div class="comment">You will need to reboot your computer for application icon to appear.
+      Without reboot, you can launch postman by typing <code class="terminal">postman</code> in terminal.
+    </div>
+  </mat-expansion-panel>
 
   <mat-expansion-panel class="block">
     <mat-expansion-panel-header>
