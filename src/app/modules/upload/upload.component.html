@@ -1,68 +1,43 @@
 <div class="mat-h1">{{menuItem.title}}</div>
+<ul class="comment">
+  <li>Set up back end. Install express-fileupload middleware.</li>
+  <li>express-fileupload accepts form data. An uploaded file is identified by its form field name.<br>
+  <code>let sampleFile = req.files.sampleFile;</code><br>Here, 'sampleFile' is the form field name.</li>
+  <li>In your component, on file select, use<br>
+    <code>
+      const file = (event.target as HTMLInputElement).files&#91;0&#93;;<br>
+      this.myForm.patchValue(&#123;<br>
+        &nbsp;&nbsp;sampleFile: file<br>
+        &#125;);<br>
+      this.myForm.get('sampleFile').updateValueAndValidity();
+    </code>
+  </li>
+  <li>Create FormData object from FormGroup object.<br>
+    <code>
+      const formData: any = new FormData();<br>
+      formData.append('name', this.myForm.get('name').value);<br>
+      formData.append('sampleFile', this.myForm.get('sampleFile').value);<br>
+      this.uploadService.uploadFormData(formData);
+    </code>
+  </li>
+  <li>
+    Call service to post data using http.post()<br>
+    <code>
+      uploadFormData(x: FormData) &#123;<br>
+      this.http.post(url, x).subscribe(<br>
+        &nbsp;&nbsp;res => console.log(res),<br>
+        &nbsp;&nbsp;error => console.log(error));<br>
+        &#125;
+    </code>
+  </li>
+</ul>
 
-<p>npm package <a href="https://www.npmjs.com/package/express-fileupload" target=_blank class="link">express-fileupload</a></p>
-
-<mat-card class="intake-card">
-  <mat-card-header>
-    <mat-card-title>
-      Intake form
-    </mat-card-title>
-    <mat-card-subtitle>
-      Provide document title, a brief description, and upload your file.
-    </mat-card-subtitle>
-  </mat-card-header>
-
-  <mat-card-content>
-
-    <!-- File selection-->
-    <button mat-raised-button color="accent" class="bt"
-          (click)="pickFile.click()">Pick file</button>
-    &nbsp;&nbsp;
-    <span *ngIf="selectedFile">You have selected {{selectedFile.name}}</span>
-
-    <!-- use name field (sampleFile) so server is able to identify your file -->
-    <input class="hidden" mat-raised-button color="accent" type="file" name="sampleFile"
-    (change)="onFileSelected($event)" #pickFile>
-
-    <br><br>
-
-    <!-- Reactive form -->
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-      <mat-form-field>
-        <mat-label>File title</mat-label>
-        <input matInput type="text"
-        formControlName="title" required>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>File description</mat-label>
-        <input matInput type="text"
-        formControlName="description" required>
-      </mat-form-field>
-      <br>
-
-      <!-- button that submit both file and form -->
-      <button type="submit" mat-raised-button color="accent" class="bt"
-      [disabled]="!(myForm.valid && selectedFile)"
-      >Upload</button>
-    </form>
-
-  </mat-card-content>
-</mat-card>
-
-<!-- A test file uploader -->
-<!-- <br><mat-divider></mat-divider><br>
-<form ref="uploadForm"
-  id="ploadForm"
-  action="http://localhost:3000/upload"
-  method="POST"
-  encType="multipart/form-data">
-  <input type="file" name="sampleFile" />
-  <input type="submit" value="Upload" />
-</form> -->
-
-<br><br>
-<button mat-raised-button color="primary" class="bt" (click)="getJSON()">Get JSON</button>
-
-<br><br>
-<button mat-raised-button color="primary" class="bt" (click)="getText()">Get text</button>
+<form [formGroup]="myForm" (ngSubmit)="submitForm()">
+  <label>Your name</label><br>
+  <input class="form-control" formControlName="name">
+  <br><br>
+  <input type="file" (change)="uploadFile($event)">
+  <br><br>
+  <button mat-raised-button color="accent"
+  type="submit" [disabled]="!myForm.valid">Submit</button>
+</form>

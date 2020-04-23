@@ -36,8 +36,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   max-width: 1000px;
 }
 
-.code {
-  color: $primary900;
+code {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  color: $primary500;
 }
 
 .hidden {
@@ -45,5 +47,5 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .comment {
-  color: $accent200;
+  color: $accent500;
 }

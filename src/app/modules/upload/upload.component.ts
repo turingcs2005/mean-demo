@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ViewDataService } from 'src/app/services/view-data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UploadService } from 'src/app/services/upload.service';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-upload',
@@ -13,50 +12,36 @@ import { HttpClient } from '@angular/common/http';
 export class UploadComponent implements OnInit {
 
   menuItem = null;
-  myForm: FormGroup = null;
-  selectedFile: File = null;
-  jsonResponse = null;
-  textResponse = null;
+  myForm: FormGroup;
 
   constructor(
     private viewDataService: ViewDataService,
-    private upLoadService: UploadService,
     private fb: FormBuilder,
-    private http: HttpClient
+    private uploadService: UploadService
   ) { }
 
   ngOnInit(): void {
     this.menuItem = this.viewDataService.getMenuList()[2];
-
     this.myForm = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required]
-    });
-
-  }
-
-  onFileSelected(event) {
-    this.selectedFile = event.target.files[0];
-    console.log(event);
-  }
-
-  onSubmit() {
-    this.upLoadService.onUploadFile(this.selectedFile);
-    this.upLoadService.onUploadForm(this.myForm.value);
-  }
-
-  getText() {
-    this.upLoadService.onGetText().subscribe( data => {
-      this.textResponse = data;
-      console.log(this.textResponse);
+      name: [null, Validators.required],
+      sampleFile: [null, Validators.required]
     });
   }
 
-  getJSON() {
-    this.upLoadService.onGetJSON().subscribe( data => {
-      this.jsonResponse = data;
-      console.log(this.jsonResponse);
+  uploadFile(event) {
+    console.log('file selected!');
+    const file = (event.target as HTMLInputElement).files[0];
+    this.myForm.patchValue({
+      sampleFile: file
     });
+    this.myForm.get('sampleFile').updateValueAndValidity();
+  }
+
+  submitForm() {
+    const formData: any = new FormData();
+    formData.append('name', this.myForm.get('name').value);
+    formData.append('sampleFile', this.myForm.get('sampleFile').value);
+    this.uploadService.uploadFormData(formData);
   }
 
 }
