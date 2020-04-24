@@ -14,9 +14,7 @@ export class UploadService {
     private http: HttpClient
   ) { }
 
-   uploadFormData(x: FormData) {
-    this.http.post(url, x).subscribe(
-      res => console.log(res),
-      error => console.log(error));
-   }
+  uploadFormData(x: FormData): Observable<any> {
+    return this.http.post(url, x);
+  }
 }

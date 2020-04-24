@@ -1,1 +1,32 @@
 <div class="mat-h1">{{menuItem.title}}</div>
+<div class="comment">
+  Angular, a front end framework, has no access to a client's file system. Use browser to download:
+  <ol>
+    <li>Create express back end post API.
+      <ul>
+        <li>The API should expect at least 1 query parameter (e.g. filename).<br>
+        <code class="code">const file = 'client/src/assets/img/' + req.query.filename;</code></li>
+        <li>Use query parameter, serve file. Make sure file folder is static (accessible)<br>
+        <code>
+          res.download(file);
+        </code></li>
+      </ul>
+    </li>
+    <li>Use service to get file<br>
+    <code>const param = new HttpParams().set('filename', x);<br>
+      const options = &#123;<br>
+      &nbsp;&nbsp;params: param<br>
+      &#125;<br>
+      return this.http.get(url, &#123;...options, responseType: 'blob'&#125; );</code></li>
+      <li>
+        In component, create a new Blob object wite the correct
+        <a href="https://www.iana.org/assignments/media-types/media-types.xhtml" target=_blank>media type</a><br>
+      <code>const blob = new Blob(&#91;res&#93;, &#123; type: 'image/jpeg'&#125;);<br>
+        const url = window.URL.createObjectURL(blob);<br>
+        window.open(url);</code>
+      </li>
+  </ol>
+
+</div>
+<input type="text" [(ngModel)]="fileName"><br><br>
+<button mat-raised-button color="accent" (click)="download()">Download</button>

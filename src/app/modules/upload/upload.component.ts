@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ViewDataService } from 'src/app/services/view-data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UploadService } from 'src/app/services/upload.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-upload',
@@ -13,6 +14,8 @@ export class UploadComponent implements OnInit {
 
   menuItem = null;
   myForm: FormGroup;
+  response$: Observable<any>;
+  success = false;
 
   constructor(
     private viewDataService: ViewDataService,
@@ -41,7 +44,16 @@ export class UploadComponent implements OnInit {
     const formData: any = new FormData();
     formData.append('name', this.myForm.get('name').value);
     formData.append('sampleFile', this.myForm.get('sampleFile').value);
-    this.uploadService.uploadFormData(formData);
+    this.response$ = this.uploadService.uploadFormData(formData);
+    this.response$.subscribe(
+      res => {
+        if (res) {
+          this.success = true;
+        }
+      }
+    );
+
+
   }
 
 }

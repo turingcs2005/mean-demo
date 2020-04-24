@@ -37,6 +37,7 @@
   <input class="form-control" formControlName="name">
   <br><br>
   <input type="file" (change)="uploadFile($event)">
+  <span *ngIf="success">Upload success!</span>
   <br><br>
   <button mat-raised-button color="accent"
   type="submit" [disabled]="!myForm.valid">Submit</button>
