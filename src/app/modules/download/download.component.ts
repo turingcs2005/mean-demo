@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewDataService } from 'src/app/services/view-data.service';
 import { DownloadService } from 'src/app/services/download.service';
-import { Observable } from 'rxjs';
+import * as fileSaver from 'file-saver';
+
 
 @Component({
   selector: 'app-download',
@@ -22,13 +23,24 @@ export class DownloadComponent implements OnInit {
     this.menuItem = this.viewDataService.getMenuList()[3];
   }
 
+  returnBlob(res): Blob {
+    console.log('file downloaded!');
+    return new Blob([res], { type: 'image/jpeg'});
+  }
+
   download() {
     this.downloadService.downloadFile(this.fileName).subscribe( res => {
       if (res) {
-        console.log('file downloaded!');
-        const blob = new Blob([res], { type: 'image/jpeg'});
-        const url = window.URL.createObjectURL(blob);
+        const url = window.URL.createObjectURL(this.returnBlob(res));
         window.open(url);
+      }
+    });
+  }
+
+  download2() {
+    this.downloadService.downloadFile(this.fileName).subscribe( res => {
+      if (res) {
+        fileSaver.saveAs(this.returnBlob(res), this.fileName);
       }
     });
   }

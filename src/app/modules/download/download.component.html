@@ -1,8 +1,8 @@
 <div class="mat-h1">{{menuItem.title}}</div>
 <div class="comment">
-  Angular, a front end framework, has no access to a client's file system. Use browser to download:
+  Angular, a front end framework, has no access to a client's file system. Use browser to open file or download to folder.
   <ol>
-    <li>Create express back end post API.
+    <li>Create express back end GET API.
       <ul>
         <li>The API should expect at least 1 query parameter (e.g. filename).<br>
         <code class="code">const file = 'client/src/assets/img/' + req.query.filename;</code></li>
@@ -19,14 +19,25 @@
       &#125;<br>
       return this.http.get(url, &#123;...options, responseType: 'blob'&#125; );</code></li>
       <li>
-        In component, create a new Blob object wite the correct
+        In component, create a function that returns a new Blob object from http response with the correct
         <a href="https://www.iana.org/assignments/media-types/media-types.xhtml" target=_blank>media type</a><br>
-      <code>const blob = new Blob(&#91;res&#93;, &#123; type: 'image/jpeg'&#125;);<br>
-        const url = window.URL.createObjectURL(blob);<br>
-        window.open(url);</code>
+      <code>new Blob(&#91;res&#93;, &#123; type: 'image/jpeg'&#125;);</code>
+      </li>
+      <li>Consume downloaded file
+        <ul>
+          <li>Open a new browser window to display file<br>
+            <code>const url = window.URL.createObjectURL(this.returnBlob(res)));<br>
+            window.open(url);</code></li>
+          <li>Save file to 'Download' folder<br>
+            <ol>
+              <li>Install file-saver library <code>npm i file-saver</code></li>
+              <li>Import file-saver in component <code>import * as fileSaver from 'file-saver';</code></li>
+              <li>Save file <code>fileSaver.saveAs(this.returnBlob(res), this.fileName);</code></li>
+            </ol>
+        </ul>
       </li>
   </ol>
 
 </div>
 <input type="text" [(ngModel)]="fileName"><br><br>
-<button mat-raised-button color="accent" (click)="download()">Download</button>
+<button mat-raised-button color="accent" (click)="download()">View</button>&nbsp;&nbsp;<button mat-raised-button color="accent" (click)="download2()">Save as</button>
