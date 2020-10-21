@@ -14,7 +14,6 @@ export class SetupComponent implements OnInit {
     'express',
     'express-generator',
     'mongoose',
-    'nodemon'
   ];
 
   projectPackages = [
@@ -22,7 +21,6 @@ export class SetupComponent implements OnInit {
     'express-fileupload',
     'mongoose',
     'socketio',
-    'socket.io-client',
     'body-parser'
   ];
 
